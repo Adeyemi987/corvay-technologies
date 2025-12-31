@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: corvay-technologies
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist/corvay-technologies/browser
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 18.17.0

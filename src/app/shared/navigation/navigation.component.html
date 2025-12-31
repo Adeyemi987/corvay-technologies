@@ -1,0 +1,102 @@
+<!-- Header / Navigation -->
+<header class="fixed top-0 left-0 right-0 nav-backdrop shadow-sm z-50">
+  <nav class="w-full px-8 sm:px-12 lg:px-16">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo - Pushed to the left -->
+      <div class="flex items-center mr-auto">
+        <a routerLink="/" class="flex items-center space-x-2 group">
+          <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+            <span class="text-white font-bold text-base">C</span>
+          </div>
+          <span class="text-base font-bold text-charcoal">Corvay Technologies</span>
+        </a>
+      </div>
+
+      <!-- Desktop Menu - Right aligned navigation items -->
+      <div class="hidden md:flex items-center space-x-8 ml-auto">
+        <a routerLink="/" routerLinkActive="text-secondary-500" [routerLinkActiveOptions]="{exact: true}" 
+           class="text-base text-charcoal hover:text-secondary-500 transition-colors font-medium">Home</a>
+        
+        <!-- Products Dropdown -->
+        <div class="relative" (mouseenter)="openProductsDropdown()" (mouseleave)="closeProductsDropdown()">
+          <button 
+            class="text-base text-charcoal hover:text-secondary-500 transition-colors font-medium flex items-center space-x-1"
+            (click)="toggleProductsDropdown()">
+            <span>Products</span>
+            <svg class="w-4 h-4 transition-transform" [class.rotate-180]="productsDropdownOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          
+          <!-- Dropdown Menu -->
+          <div *ngIf="productsDropdownOpen" 
+               (mouseenter)="openProductsDropdown()"
+               (mouseleave)="closeProductsDropdown()"
+               class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-neutral-200">
+            <a *ngFor="let product of products" 
+               [href]="product.url" 
+               target="_blank"
+               class="block px-4 py-2 text-sm text-charcoal hover:bg-neutral-100 hover:text-secondary-500 transition-colors">
+              {{ product.name }}
+            </a>
+          </div>
+        </div>
+        
+        <a routerLink="/about" routerLinkActive="text-secondary-500" 
+           class="text-base text-charcoal hover:text-secondary-500 transition-colors font-medium">About</a>
+        <a routerLink="/contact" routerLinkActive="text-secondary-500" 
+           class="text-base text-charcoal hover:text-secondary-500 transition-colors font-medium">Contact</a>
+      
+        <!-- Request Demo Button -->
+        <button routerLink="/contact" 
+                class="bg-secondary-500 text-white px-6 py-2.5 rounded-lg hover:bg-secondary-600 transition-all transform hover:scale-105 text-base font-medium shadow-md">
+          Request Demo
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button (click)="toggleMobileMenu()" class="text-charcoal hover:text-secondary-500 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path *ngIf="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            <path *ngIf="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div *ngIf="mobileMenuOpen" class="md:hidden pb-4 space-y-2 mobile-menu-enter">
+      <a routerLink="/" (click)="closeMobileMenu()" routerLinkActive="text-secondary-500" [routerLinkActiveOptions]="{exact: true}"
+         class="block py-2 text-base text-charcoal hover:text-secondary-500 font-medium">Home</a>
+      
+      <!-- Products Dropdown Mobile -->
+      <div>
+        <button (click)="toggleProductsDropdown()" class="flex items-center justify-between w-full py-2 text-base text-charcoal hover:text-secondary-500 font-medium">
+          <span>Products</span>
+          <svg class="w-4 h-4 transition-transform" [class.rotate-180]="productsDropdownOpen" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div *ngIf="productsDropdownOpen" class="pl-4 space-y-2 mt-2">
+          <a *ngFor="let product of products" 
+             [href]="product.url" 
+             target="_blank"
+             (click)="closeMobileMenu()"
+             class="block py-1 text-base text-charcoal hover:text-secondary-500">
+            {{ product.name }}
+          </a>
+        </div>
+      </div>
+      
+      <a routerLink="/about" (click)="closeMobileMenu()" routerLinkActive="text-secondary-500"
+         class="block py-2 text-base text-charcoal hover:text-secondary-500 font-medium">About</a>
+      <a routerLink="/contact" (click)="closeMobileMenu()" routerLinkActive="text-secondary-500"
+         class="block py-2 text-base text-charcoal hover:text-secondary-500 font-medium">Contact</a>
+      <button routerLink="/contact" (click)="closeMobileMenu()"
+              class="w-full bg-secondary-500 text-white px-6 py-2.5 rounded-lg hover:bg-secondary-600 transition-colors text-base font-medium mt-2">
+        Request Demo
+      </button>
+    </div>
+  </nav>
+</header>

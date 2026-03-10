@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 interface ContactForm {
   name: string;
@@ -17,6 +18,14 @@ interface ContactForm {
   styleUrl: './contact.component.css'
 })
 export class ContactComponent {
+  safeFormUrl: SafeResourceUrl;
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.safeFormUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      'https://docs.google.com/forms/d/e/1FAIpQLSeUujRdKE9XyIA3pJ0jwC8T3nCQ-jq5Y2tI55lRLI3GZgb4vg/viewform?embedded=true'
+    );
+  }
+
   contactForm: ContactForm = {
     name: '',
     email: '',

@@ -15,7 +15,8 @@ export class NavigationComponent {
   currentYear = new Date().getFullYear();
   private dropdownTimeout: any;
 
-  products = [
+  products: { name: string; url?: string; routerLink?: string; logo?: string }[] = [
+    { name: 'DevAssist AI', routerLink: '/products/devassist', logo: 'devassist-logo.png' },
     { name: 'SaaS-Connect', url: 'https://saas-connect.onrender.com/' },
     { name: 'Ecolytix', url: 'https://sustainability-plat.onrender.com/' }
   ];

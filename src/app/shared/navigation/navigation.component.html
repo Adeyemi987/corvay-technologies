@@ -5,8 +5,8 @@
       <!-- Logo - Pushed to the left -->
       <div class="flex items-center mr-auto">
         <a routerLink="/" class="flex items-center space-x-2 group">
-          <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-            <span class="text-white font-bold text-base">C</span>
+          <div class="w-9 h-9 rounded-lg overflow-hidden group-hover:scale-110 transition-transform shadow-md flex-shrink-0">
+            <img src="corvay-logo.jpg" alt="Corvay Technologies" class="w-full h-full object-cover" />
           </div>
           <span class="text-base font-bold text-charcoal">Corvay Technologies</span>
         </a>
@@ -32,13 +32,25 @@
           <div *ngIf="productsDropdownOpen" 
                (mouseenter)="openProductsDropdown()"
                (mouseleave)="closeProductsDropdown()"
-               class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-neutral-200">
-            <a *ngFor="let product of products" 
-               [href]="product.url" 
-               target="_blank"
-               class="block px-4 py-2 text-sm text-charcoal hover:bg-neutral-100 hover:text-secondary-500 transition-colors">
-              {{ product.name }}
-            </a>
+               class="absolute left-0 mt-2 w-52 bg-white rounded-lg shadow-lg py-2 z-50 border border-neutral-200">
+            <ng-container *ngFor="let product of products">
+              <!-- Internal route -->
+              <a *ngIf="product.routerLink"
+                 [routerLink]="product.routerLink"
+                 (click)="closeProductsDropdown()"
+                 class="flex items-center gap-2.5 px-4 py-2.5 text-sm text-charcoal hover:bg-neutral-100 hover:text-secondary-500 transition-colors font-medium">
+                <img *ngIf="product.logo" [src]="product.logo" [alt]="product.name" class="w-6 h-6 rounded-md object-contain flex-shrink-0" />
+                <span>{{ product.name }}</span>
+                <span class="ml-auto text-xs bg-secondary-100 text-secondary-600 px-1.5 py-0.5 rounded-full">New</span>
+              </a>
+              <!-- External link -->
+              <a *ngIf="product.url"
+                 [href]="product.url"
+                 target="_blank"
+                 class="block px-4 py-2.5 text-sm text-charcoal hover:bg-neutral-100 hover:text-secondary-500 transition-colors">
+                {{ product.name }}
+              </a>
+            </ng-container>
           </div>
         </div>
         
@@ -79,13 +91,25 @@
           </svg>
         </button>
         <div *ngIf="productsDropdownOpen" class="pl-4 space-y-2 mt-2">
-          <a *ngFor="let product of products" 
-             [href]="product.url" 
-             target="_blank"
-             (click)="closeMobileMenu()"
-             class="block py-1 text-base text-charcoal hover:text-secondary-500">
-            {{ product.name }}
-          </a>
+          <ng-container *ngFor="let product of products">
+            <!-- Internal route (mobile) -->
+            <a *ngIf="product.routerLink"
+               [routerLink]="product.routerLink"
+               (click)="closeMobileMenu()"
+               class="flex items-center gap-2.5 py-1 text-base text-charcoal hover:text-secondary-500 font-medium">
+              <img *ngIf="product.logo" [src]="product.logo" [alt]="product.name" class="w-6 h-6 rounded-md object-contain flex-shrink-0" />
+              <span>{{ product.name }}</span>
+              <span class="ml-1.5 text-xs bg-secondary-100 text-secondary-600 px-1.5 py-0.5 rounded-full">New</span>
+            </a>
+            <!-- External link (mobile) -->
+            <a *ngIf="product.url"
+               [href]="product.url"
+               target="_blank"
+               (click)="closeMobileMenu()"
+               class="block py-1 text-base text-charcoal hover:text-secondary-500">
+              {{ product.name }}
+            </a>
+          </ng-container>
         </div>
       </div>
       

@@ -6,6 +6,18 @@ services:
     staticPublishPath: dist/corvay-technologies/browser
     routes:
       - type: rewrite
+        source: /products/devassist
+        destination: /index.html
+      - type: rewrite
+        source: /products
+        destination: /index.html
+      - type: rewrite
+        source: /about
+        destination: /index.html
+      - type: rewrite
+        source: /contact
+        destination: /index.html
+      - type: rewrite
         source: /*
         destination: /index.html
     headers:

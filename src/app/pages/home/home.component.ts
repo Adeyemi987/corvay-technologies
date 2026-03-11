@@ -73,6 +73,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/products']);
   }
 
+  navigateToDevAssist(): void {
+    this.router.navigate(['/products/devassist']);
+  }
+
   navigateToContact(): void {
     this.router.navigate(['/contact']);
   }

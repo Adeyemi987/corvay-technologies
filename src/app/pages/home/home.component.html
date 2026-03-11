@@ -208,9 +208,35 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      <!-- SaaS-Connect Card -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- DevAssist AI Card -->
       <div class="group card-hover bg-white rounded-3xl overflow-hidden shadow-xl animate-on-scroll stagger-1">
+        <div class="relative h-64 bg-gradient-to-br from-violet-500 to-violet-700 flex items-center justify-center">
+          <div class="text-white text-6xl font-bold opacity-20">API</div>
+          <div class="absolute inset-0 bg-white/10 backdrop-blur-sm flex items-center justify-center">
+            <div class="text-white text-center">
+              <div class="flex items-center justify-center gap-2 mb-2">
+                <h3 class="text-3xl font-bold">DevAssist AI</h3>
+                <span class="text-xs bg-white/20 border border-white/30 text-white px-2 py-0.5 rounded-full font-semibold">New</span>
+              </div>
+              <p class="text-white/90">AI-Powered API Integration</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-8">
+          <p class="text-charcoal/80 mb-6">
+            Securely integrate APIs faster with an AI assistant purpose-built for developer teams and enterprises.
+          </p>
+          <button
+            (click)="navigateToDevAssist()"
+            class="w-full bg-secondary-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-secondary-600 transition-all transform hover:scale-105">
+            Learn More
+          </button>
+        </div>
+      </div>
+
+      <!-- SaaS-Connect Card -->
+      <div class="group card-hover bg-white rounded-3xl overflow-hidden shadow-xl animate-on-scroll stagger-2">
         <div class="relative h-64 bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
           <div class="text-white text-6xl font-bold opacity-20">SaaS</div>
           <div class="absolute inset-0 bg-white/10 backdrop-blur-sm flex items-center justify-center">
@@ -233,7 +259,7 @@
       </div>
 
       <!-- Ecolytix Card -->
-      <div class="group card-hover bg-white rounded-3xl overflow-hidden shadow-xl animate-on-scroll stagger-2">
+      <div class="group card-hover bg-white rounded-3xl overflow-hidden shadow-xl animate-on-scroll stagger-3">
         <div class="relative h-64 bg-gradient-to-br from-accent-500 to-accent-700 flex items-center justify-center">
           <div class="text-white text-6xl font-bold opacity-20">ECO</div>
           <div class="absolute inset-0 bg-white/10 backdrop-blur-sm flex items-center justify-center">

@@ -45,6 +45,19 @@ module.exports = {
           800: '#2e7d32',
           900: '#1b5e20',
         },
+        // Violet: DevAssist AI brand color
+        violet: {
+          50: '#f5f3ff',
+          100: '#ede9fe',
+          200: '#ddd6fe',
+          300: '#c4b5fd',
+          400: '#a78bfa',
+          500: '#7c3aed',
+          600: '#6d28d9',
+          700: '#5b21b6',
+          800: '#4c1d95',
+          900: '#2e1065',
+        },
         // Neutrals
         charcoal: '#1F2933',
         'light-gray': '#F5F7FA',
@@ -55,4 +68,8 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    { pattern: /^(from|to|bg|text)-(primary|secondary|accent|violet)-(50|100|200|300|400|500|600|700|800|900)$/ },
+    { pattern: /^bg-gradient-to-(br|r|l|t|b)$/ },
+  ],
 }

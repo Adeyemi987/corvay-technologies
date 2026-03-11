@@ -1,26 +1,44 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 interface Product {
   name: string;
   tagline: string;
   description: string;
   features: string[];
-  url: string;
+  url?: string;
+  routerLink?: string;
   color: string;
+  badge?: string;
 }
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
   
   products: Product[] = [
+    {
+      name: 'DevAssist AI',
+      tagline: 'Secure AI-powered API integration for modern developers',
+      description: 'An intelligent integration assistant that helps developers understand and integrate APIs faster while giving organizations a secure, controlled environment for processing API documentation.',
+      features: [
+        'Secure AI environment for API documentation',
+        'Instant endpoint and auth flow understanding',
+        'Swagger / OpenAPI specification support',
+        'Enterprise governance and audit trail',
+        'Integration-ready logic generation',
+        'Built for developer teams and enterprises'
+      ],
+      routerLink: '/products/devassist',
+      color: 'violet',
+      badge: 'New'
+    },
     {
       name: 'SaaS-Connect',
       tagline: 'Enterprise SaaS integration for operational efficiency',

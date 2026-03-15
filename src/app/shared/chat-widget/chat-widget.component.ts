@@ -20,7 +20,7 @@ declare global {
 })
 export class ChatWidgetComponent implements OnInit {
   private readonly widgetUrl = 'https://devassist-widget.onrender.com';
-  private readonly serviceId = 'ae4cd46e-7963-4a26-a46d-82b15d8b64dd';
+  private readonly serviceId = 'b1e5e2b2-60e9-4c37-90fb-dde2cb5b8700';
 
   ngOnInit(): void {
     this.loadDevAssistWidget();

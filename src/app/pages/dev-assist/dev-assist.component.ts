@@ -3,6 +3,22 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
+declare global {
+  interface Window {
+    OmniDocsAI?: {
+      mount: (config: {
+        apiBaseUrl: string;
+        serviceId: string;
+        mode: string;
+        title: string;
+        subtitle: string;
+        language: string;
+      }) => void;
+      unmount?: () => void;
+    };
+  }
+}
+
 @Component({
   selector: 'app-dev-assist',
   standalone: true,
@@ -15,6 +31,7 @@ export class DevAssistComponent implements OnInit, OnDestroy {
   activeTab = 0;
   carouselIndex = 0;
   private carouselTimer: any;
+  private widgetScript?: HTMLScriptElement;
 
   problems = [
     { icon: '📄', title: '40+ Pages of Documentation', desc: 'Developers drown in lengthy API docs before writing a single line of integration code.' },
@@ -98,10 +115,37 @@ export class DevAssistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.startCarousel();
+    this.loadOmniDocsWidget();
   }
 
   ngOnDestroy(): void {
     if (this.carouselTimer) clearInterval(this.carouselTimer);
+    window.OmniDocsAI?.unmount?.();
+    this.widgetScript?.remove();
+  }
+
+  private loadOmniDocsWidget(): void {
+    const script = document.createElement('script');
+    script.src = 'https://devassist-api-1zpc.onrender.com/widget/v1.js';
+    script.onload = () => this.initOmniDocsWidget();
+    script.onerror = (err) => console.error('OmniDocsAI script failed to load:', err);
+    document.body.appendChild(script);
+    this.widgetScript = script;
+  }
+
+  private initOmniDocsWidget(): void {
+    try {
+      window.OmniDocsAI?.mount({
+        apiBaseUrl: 'https://devassist-api-1zpc.onrender.com',
+        serviceId: '5c75a3b8-8559-46d3-997c-8da1886a1576',
+        mode: 'floating',
+        title: 'Ask devAssist AI',
+        subtitle: 'Senior integration guidance from these docs',
+        language: 'C#',
+      });
+    } catch (err) {
+      console.error('OmniDocsAI init failed:', err);
+    }
   }
 
   startCarousel(): void {
